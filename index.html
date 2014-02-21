@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User repositories info from GitHub</title>
+</head>
+<body>
+
+  <!-- Form for entering GitHub handle -->
+  <form>
+<label for="github">Github User:</label>
+<input id="github" placeholder="ENTER GITHUB HANDLE" style="width:50%">
+<input type="submit">
+</form>
+  <!-- Table for rendering repositories details -->
+<table id="repos">
+	<thead>
+		<tr>
+			<th></th>	
+			<th></th>	
+			<th></th>	
+		</tr>
+	</thead>
+	<tbody>
+
+	</tbody>
+</table>
+  <script src="emitter.js"></script>
+  <script src="index.js"></script>
+  <script src="jquery-1.9.1.min.js"></script>
+  
+  <script type="text/javascript">
+
+$(document).ready(function(){
+$('input[type="submit"]').on('click',function(e){
+	e.preventDefault();
+
+	var user = $('input#github').val();
+	loadRepos(user);
+	// alert(user);
+})
+});
+  </script>
+</body>
+</html>
