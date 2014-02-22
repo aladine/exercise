@@ -4,7 +4,7 @@
 
 var emitter = new EventEmitter();
 
-var normalize = function(str){return str.replace('_','.');};
+var normalize = function(str){return str.replace(/\./g,'_');};
 var api_url = 'https://api.github.com/';
 function loadRepos(user){
 	 emitter.on('data.repos', renderRepos);
@@ -42,35 +42,35 @@ function renderRepos(type,data){
 		
 		    list.push('<tr><td>'
 		    	+'<a href="#">'+repo.name+'</a>'
-		    	+'<span id="data_branches_'+repo.name+'"></span>'
+		    	+'<br><span id="data_branches_'+repo.name+'"></span>'
 		    	+'</td><td id="data_collaborators_'+repo.name+'">'
 		    	+'</td><td>'+(new Date(repo.updated_at))
 		    	+'</td></tr>');
 		  });
-	console.log($('tbody','#'+normalize(type)),list);
-	$('tbody','#data_repos').html(list.join());//+normalize(type)
+	// console.log($('tbody','#'+normalize(type)),list);
+	$('tbody','#'+normalize(type)).html(list.join());//+normalize(type)
 }
 
 // render branches data
 function renderBranches(type,data){ 
-	console.log('renderBranches',type,data);
+	// console.log('renderBranches',type,data);
 	var list =[];
 	data.forEach(function(branch){
 		list.push(branch.name);
 	});
-	console.log('('+list.join(',')+')');
+	// console.log('('+list.join(',')+')');
 	$('#'+normalize(type)).html('('+list.join(',')+')');
 }
 
 // render collaborators data
 function renderCollaborators(type,data){ 
-	console.log('renderCollaborators',type,data);
+	// console.log('renderCollaborators',type,data);
 
 	var list =[];
 	data.forEach(function(collaborator){
-		list.push('<a href="#">'+collaborator.name+'</a>');
+		list.push('<a href="#">'+collaborator.login+'</a>');
 	});
-	console.log('('+list.join(',')+')');
+	// console.log('('+list.join(',')+')');
 	$('#'+normalize(type)).html(list.join(','));
 }
 
