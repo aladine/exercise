@@ -44,11 +44,11 @@ function renderRepos(type,data){
 		    	+'<a href="#">'+repo.name+'</a>'
 		    	+'<span id="data_branches_'+repo.name+'"></span>'
 		    	+'</td><td id="data_collaborators_'+repo.name+'">'
-		    	+'</td><td>'+repo.created
+		    	+'</td><td>'+(new Date(repo.updated_at))
 		    	+'</td></tr>');
 		  });
 	console.log($('tbody','#'+normalize(type)),list);
-	$('tbody','#'+normalize(type)).html(list.join());
+	$('tbody','#data_repos').html(list.join());//+normalize(type)
 }
 
 // render branches data
@@ -58,17 +58,19 @@ function renderBranches(type,data){
 	data.forEach(function(branch){
 		list.push(branch.name);
 	});
+	console.log('('+list.join(',')+')');
 	$('#'+normalize(type)).html('('+list.join(',')+')');
 }
 
 // render collaborators data
 function renderCollaborators(type,data){ 
 	console.log('renderCollaborators',type,data);
-	
+
 	var list =[];
 	data.forEach(function(collaborator){
 		list.push('<a href="#">'+collaborator.name+'</a>');
 	});
+	console.log('('+list.join(',')+')');
 	$('#'+normalize(type)).html(list.join(','));
 }
 
